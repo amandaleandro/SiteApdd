@@ -4,7 +4,8 @@
   "description": "Site institucional para consultoria de desenvolvimento de sistemas",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "migrate": "node scripts/migrate-db.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
