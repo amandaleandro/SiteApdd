@@ -3,7 +3,13 @@ require("dotenv").config();
 
 const DATABASE_URL = process.env.DATABASE_URL || "postgres://apdd:apdd@localhost:5432/apdd";
 
-const pool = new Pool({ connectionString: DATABASE_URL });
+const pool = new Pool({ 
+  connectionString: DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  },
+  connectionTimeoutMillis: 10000
+});
 
 const migrations = [
   // Tabela de contatos

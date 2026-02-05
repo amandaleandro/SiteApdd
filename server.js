@@ -19,7 +19,10 @@ const activeTokens = new Set();
 
 const DATABASE_URL =
   process.env.DATABASE_URL || "postgres://apdd:apdd@localhost:5432/apdd";
-const pool = new Pool({ connectionString: DATABASE_URL });
+const pool = new Pool({ 
+  connectionString: DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
