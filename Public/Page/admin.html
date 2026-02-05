@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard do Blog • APDD</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <div class="logo">
+        <img src="/images/2025_APDD_LOGO_COLOR__ALTA_PNG.png" alt="APDD" />
+      </div>
+      <div>
+        <h1>Dashboard do Blog</h1>
+        <p>Gerencie seus posts semanais com facilidade.</p>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <section class="admin-card" id="loginCard">
+        <h2>Login</h2>
+        <form id="loginForm" class="form">
+          <label>
+            Usuário
+            <input type="text" name="username" required />
+          </label>
+          <label>
+            Senha
+            <input type="password" name="password" required />
+          </label>
+          <button class="btn btn-primary" type="submit">Entrar</button>
+          <p id="loginFeedback" class="form-feedback"></p>
+        </form>
+      </section>
+
+      <section class="admin-card" id="dashboard" hidden>
+        <div class="admin-toolbar">
+          <h2>Dashboard</h2>
+          <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h4>Total de Leads</h4>
+            <p id="totalLeads" class="stat-value">0</p>
+          </div>
+          <div class="stat-card">
+            <h4>Leads esta semana</h4>
+            <p id="leadsWeek" class="stat-value">0</p>
+          </div>
+          <div class="stat-card">
+            <h4>Posts publicados</h4>
+            <p id="publishedPosts" class="stat-value">0</p>
+          </div>
+          <div class="stat-card">
+            <h4>Total de posts</h4>
+            <p id="totalPosts" class="stat-value">0</p>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <h3>Leads recebidos</h3>
+          <button class="btn btn-primary" id="exportBtn" style="margin-bottom: 16px;">Exportar para CSV</button>
+          <canvas id="leadsChart" style="max-height: 300px; margin-bottom: 24px;"></canvas>
+          <div id="leadsList" class="leads-list"></div>
+        </div>
+
+        <div class="admin-section">
+          <h3>Novo post</h3>
+          <form id="postForm" class="form">
+            <label>
+              Título
+              <input type="text" name="title" required />
+            </label>
+            <label>
+              Resumo
+              <input type="text" name="excerpt" />
+            </label>
+            <label>
+              Categoria
+              <input type="text" name="category" placeholder="Tecnologia" />
+            </label>
+            <label>
+              URL da capa (opcional)
+              <input type="text" name="coverImage" placeholder="/images/sua-imagem.jpg" />
+            </label>
+            <label>
+              Conteúdo
+              <textarea name="content" rows="6" required></textarea>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" name="published" />
+              Publicar imediatamente
+            </label>
+            <button class="btn btn-primary" type="submit">Salvar post</button>
+            <p id="postFeedback" class="form-feedback"></p>
+          </form>
+        </div>
+
+        <div class="admin-section">
+          <h3>Posts</h3>
+          <div id="postsList"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
