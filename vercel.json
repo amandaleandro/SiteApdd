@@ -11,11 +11,5 @@
       "src": "/(.*)",
       "dest": "server.js"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "ADMIN_USER": "@admin_user",
-    "ADMIN_PASS": "@admin_pass",
-    "PORT": "3000"
-  }
+  ]
 }
