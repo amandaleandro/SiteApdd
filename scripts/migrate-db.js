@@ -12,27 +12,35 @@ const pool = new Pool({
 });
 
 const migrations = [
-  // Tabela de contatos
-  `CREATE TABLE IF NOT EXISTS contacts (
+  // Tabela de leads
+  `CREATE TABLE IF NOT EXISTS leads (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255),
-    phone VARCHAR(20),
-    message TEXT,
+    email VARCHAR(255) NOT NULL,
+    company VARCHAR(255),
+    message TEXT NOT NULL,
+    ip VARCHAR(45),
+    user_agent TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`,
 
-  // Tabela de sessões admin
-  `CREATE TABLE IF NOT EXISTS admin_sessions (
+  // Tabela de posts do blog
+  `CREATE TABLE IF NOT EXISTS blog_posts (
     id SERIAL PRIMARY KEY,
-    token VARCHAR(255) UNIQUE NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    excerpt TEXT,
+    content TEXT NOT NULL,
+    cover_image VARCHAR(500),
+    category VARCHAR(100) DEFAULT 'Tecnologia',
+    published BOOLEAN DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`,
 
   // Criar índices para melhor performance
-  `CREATE INDEX IF NOT EXISTS idx_contacts_email ON contacts(email)`,
-  `CREATE INDEX IF NOT EXISTS idx_admin_sessions_token ON admin_sessions(token)`
+  `CREATE INDEX IF NOT EXISTS idx_leads_email ON leads(email)`,
+  `CREATE INDEX IF NOT EXISTS idx_blog_posts_published ON blog_posts(published)`,
+  `CREATE INDEX IF NOT EXISTS idx_blog_posts_created ON blog_posts(created_at)`
 ];
 
 async function runMigrations() {
