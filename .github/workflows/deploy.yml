@@ -21,11 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      - name: Run database migrations
-        run: npm run migrate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      
       - name: Install Vercel CLI
         run: npm install -g vercel
       
