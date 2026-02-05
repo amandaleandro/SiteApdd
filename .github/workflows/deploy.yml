@@ -26,11 +26,13 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+      
       - name: Deploy to Vercel
-        uses: vercel/action@master
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           ADMIN_USER: ${{ secrets.ADMIN_USER }}
           ADMIN_PASS: ${{ secrets.ADMIN_PASS }}
